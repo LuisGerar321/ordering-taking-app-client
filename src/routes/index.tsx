@@ -10,7 +10,7 @@ export const pages = [
   },
   {
     icon: <CategoryIcon />,
-    path: "/",
+    path: "/products",
     name: "Products",
   },
   {
