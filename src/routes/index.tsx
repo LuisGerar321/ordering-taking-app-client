@@ -1,19 +1,20 @@
-import InventoryIcon from "@mui/icons-material/Inventory";
-import StoreIcon from "@mui/icons-material/Store";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import HailIcon from "@mui/icons-material/Hail";
+import StorefrontIcon from "@mui/icons-material/Storefront";
+import CategoryIcon from "@mui/icons-material/Category";
+
 export const pages = [
   {
-    icon: <StoreIcon />,
-    path: "/",
-    name: "Home",
-  },
-  {
-    icon: <InventoryIcon />,
+    icon: <HailIcon />,
     path: "/clients",
     name: "Clients",
   },
   {
-    icon: <ShoppingCartIcon />,
+    icon: <CategoryIcon />,
+    path: "/",
+    name: "Products",
+  },
+  {
+    icon: <StorefrontIcon />,
     path: "/ordering",
     name: "Ordering",
   },
