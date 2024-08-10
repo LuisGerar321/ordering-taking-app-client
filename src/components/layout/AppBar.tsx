@@ -22,7 +22,7 @@ export const NavBarApp = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ display: { xs: "flex", md: "none" }, backgroundColor: "whitesmoke" }}>
+    <AppBar position="fixed" sx={{ display: { xs: "flex", md: "none" }, backgroundColor: "whitesmoke" }}>
       <Toolbar sx={{ justifyContent: "space-between" }}>
         <Avatar src={logo} sx={{ width: 50, height: 50 }} />
         <IconButton aria-label="menu" onClick={handleMenuOpen}>

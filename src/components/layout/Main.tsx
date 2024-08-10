@@ -14,7 +14,7 @@ export const Main = ({ children }: MainLayoutProps) => {
       <NavBarApp></NavBarApp>
       <SideBar></SideBar>
       <Box sx={{ width: "100%", height: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>{children}</Box>
-      <Footer sx={{ display: { sx: "flex", md: "none" } }}></Footer>
+      <Footer sx={{ display: { sx: "flex", md: "none" }, position: { xs: "fixed" } }}></Footer>
     </Box>
   );
 };

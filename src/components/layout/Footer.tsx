@@ -1,4 +1,4 @@
-import { Box, Divider, Typography, SxProps } from "@mui/material";
+import { Box, Paper, Divider, Typography, SxProps } from "@mui/material";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 
@@ -7,7 +7,7 @@ interface FooterProps {
 }
 export const Footer = ({ sx }: FooterProps) => {
   return (
-    <Box
+    <Paper
       sx={{
         position: "absolute",
         bottom: 0,
@@ -20,6 +20,7 @@ export const Footer = ({ sx }: FooterProps) => {
         alignItems: "center",
         ...(sx || {}),
       }}
+      elevation={6}
     >
       <Divider sx={{ width: "100%" }} />
       <Typography fontSize={12}>Developed by Luis Gerardo - 2024</Typography>
@@ -31,6 +32,6 @@ export const Footer = ({ sx }: FooterProps) => {
           <LinkedInIcon sx={{ fontSize: 30 }} />
         </a>
       </Box>
-    </Box>
+    </Paper>
   );
 };
