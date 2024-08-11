@@ -18,22 +18,33 @@ interface Product {
 export interface IProductsIds {
   [key: string]: number;
 }
+
+export interface Client {
+  id: number;
+  name: string;
+}
+
+export interface Address {
+  id: number;
+  address: string;
+}
+
 export interface StepperState {
   activeStep: number;
-  clientId?: number | null;
-  clientAddressId?: number | null;
+  client?: Client | null;
+  clientAddress?: Address | null;
   productIds: IProductsIds;
 }
 
 export interface StepperAction {
   type: EStepperAction;
-  payload?: number | number[];
+  payload?: Client | Address | number | number[];
 }
 
 const initialState: StepperState = {
   activeStep: 0,
-  clientId: null,
-  clientAddressId: null,
+  client: null,
+  clientAddress: null,
   productIds: {} as IProductsIds,
 };
 
@@ -46,9 +57,9 @@ export const StepperReducer = (state: StepperState, action: StepperAction): Step
     case EStepperAction.RESET:
       return initialState;
     case EStepperAction.SELECT_CLIENT:
-      return { ...state, clientId: action.payload as number };
+      return { ...state, client: action.payload as Client };
     case EStepperAction.SELECT_ADDRESS:
-      return { ...state, clientAddressId: action.payload as number };
+      return { ...state, clientAddress: action.payload as Address };
     case EStepperAction.ADD_PRODUCT: {
       const productId = action.payload as number;
       return {

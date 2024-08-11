@@ -18,10 +18,10 @@ export const OrderingSummary: React.FC = () => {
   if (!context) throw new Error("OrderingSummary needs a StepperProvider");
 
   const { state } = context;
-  const { clientId, clientAddressId, productIds } = state;
+  const { client, clientAddress, productIds } = state;
 
-  const client = clientId ? `Client ID: ${clientId}` : "No client selected";
-  const clientAddress = clientAddressId ? `Client Address ID: ${clientAddressId}` : "No address selected";
+  const clientObj = client?.id ? client.name : "No client selected";
+  const clientAddressObj = clientAddress?.address ? clientAddress.address : "No address selected";
 
   const selectedProducts = Object.keys(productIds)
     .map((idStr) => {
@@ -37,18 +37,18 @@ export const OrderingSummary: React.FC = () => {
   return (
     <Box mt={15} mb={10} p={3} border={1} borderRadius={8} borderColor="grey.300">
       <Typography variant="h6" gutterBottom>
-        Resumen del Pedido
+        Product Summary
       </Typography>
       <Divider />
       <Box mt={2} mb={2}>
         <Typography variant="subtitle1" gutterBottom>
           Cliente:
         </Typography>
-        <Typography variant="body1">{client}</Typography>
+        <Typography variant="body1">{clientObj}</Typography>
         <Typography variant="subtitle1" gutterBottom mt={2}>
           Dirección de Envío:
         </Typography>
-        <Typography variant="body1">{clientAddress}</Typography>
+        <Typography variant="body1">{clientAddressObj}</Typography>
       </Box>
       <Divider />
       <Box mt={2}>

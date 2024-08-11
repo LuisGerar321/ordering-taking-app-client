@@ -8,7 +8,7 @@ interface StepperProviderProp {
 const StepperContext = createContext<{ state: StepperState; dispatch: React.Dispatch<StepperAction> } | undefined>(undefined);
 
 export const StepperProvider: React.FC<StepperProviderProp> = ({ children }) => {
-  const [state, dispatch] = useReducer(StepperReducer, { activeStep: 0, clientId: null, clientAddressId: null, productIds: {} });
+  const [state, dispatch] = useReducer(StepperReducer, { activeStep: 0, client: null, clientAddress: null, productIds: {} });
   return <StepperContext.Provider value={{ state, dispatch }}>{children}</StepperContext.Provider>;
 };
 

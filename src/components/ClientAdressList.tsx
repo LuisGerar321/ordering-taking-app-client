@@ -21,12 +21,12 @@ export const ClientAdressList = () => {
 
   const { state, dispatch } = context;
 
-  const [selectedAddress, setSelectedAddress] = useState<number | null>(state.clientAddressId ?? null);
+  const [selectedAddress, setSelectedAddress] = useState<number | null>(state.clientAddress?.id ?? null);
 
-  const addresses = shippingAddresses.filter((address) => address.clientId === state.clientId);
+  const addresses = shippingAddresses.filter((address) => address.clientId === state.client?.id);
 
-  const handleSelectAddress = (addressId: number) => {
-    dispatch({ type: EStepperAction.SELECT_ADDRESS, payload: addressId });
+  const handleSelectAddress = (addressId: number, addresAddress: string) => {
+    dispatch({ type: EStepperAction.SELECT_ADDRESS, payload: { id: addressId, address: addresAddress } });
     setSelectedAddress(addressId);
   };
 
@@ -45,7 +45,7 @@ export const ClientAdressList = () => {
           <ListItem
             key={address.id}
             button
-            onClick={() => handleSelectAddress(address.id)}
+            onClick={() => handleSelectAddress(address.id, address.address)}
             selected={selectedAddress === address.id}
             sx={{ bgcolor: selectedAddress === address.id ? "action.selected" : "transparent" }}
           >

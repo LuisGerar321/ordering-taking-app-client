@@ -1,8 +1,9 @@
-import { Button, Grid, Box } from "@mui/material";
+import { Button, Grid, Box, IconButton, Typography } from "@mui/material";
 import React, { useContext, useState } from "react";
 import { StepperContext } from "../contexts/Stepper";
 import { EStepperAction } from "../store/Stepper";
 import { addOrder } from "../api";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 
 export const StepperBarAction = () => {
   const context = useContext(StepperContext);
@@ -16,15 +17,15 @@ export const StepperBarAction = () => {
 
   const handleCreateOrder = async () => {
     try {
-      const { clientId, clientAddressId, productIds } = state;
+      const { client, clientAddress, productIds } = state;
 
-      if (!clientId || !clientAddressId || !productIds || productIds.length === 0) {
+      if (!client || !clientAddress || !productIds || productIds.length === 0) {
         throw new Error("All fields must be filled out");
       }
 
       const res = await addOrder({
-        clientId,
-        shippingAddressId: clientAddressId,
+        clientId: client.id,
+        shippingAddressId: clientAddress.id,
         products: Object.entries(productIds).map(([id, quantity]) => ({
           id: parseInt(id),
           quantity: quantity,
@@ -50,7 +51,10 @@ export const StepperBarAction = () => {
         !isSubmited ? (
           <Button onClick={handleCreateOrder}>Submit Order</Button>
         ) : (
-          <></>
+          <Button variant="contained">
+            <Typography>Download PDF</Typography>
+            <PictureAsPdfIcon></PictureAsPdfIcon>
+          </Button>
         )
       ) : (
         <React.Fragment>

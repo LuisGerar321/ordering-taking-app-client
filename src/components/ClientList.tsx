@@ -27,7 +27,7 @@ export const ClientList = () => {
 
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(0);
-  const [selectedClient, setSelectedClient] = useState<number | null>(state.clientId ?? null);
+  const [selectedClient, setSelectedClient] = useState<number | null>(state.client?.id ?? null);
   const itemsPerPage = 4;
 
   const filteredClients = clients.filter((client) => client.name.toLowerCase().includes(searchTerm.toLowerCase()));
@@ -37,8 +37,8 @@ export const ClientList = () => {
     setPage(0);
   };
 
-  const handleSelectClient = (clientId: number) => {
-    dispatch({ type: EStepperAction.SELECT_CLIENT, payload: clientId });
+  const handleSelectClient = (clientId: number, name: string) => {
+    dispatch({ type: EStepperAction.SELECT_CLIENT, payload: { id: clientId, name } });
     setSelectedClient(clientId);
   };
 
@@ -70,7 +70,7 @@ export const ClientList = () => {
       {/* Lista de clientes */}
       <List>
         {displayedClients.map((client) => (
-          <ListItem key={client.id} button onClick={() => handleSelectClient(client.id)} sx={{ bgcolor: selectedClient === client.id ? "action.selected" : "transparent" }}>
+          <ListItem key={client.id} button onClick={() => handleSelectClient(client.id, client.name)} sx={{ bgcolor: selectedClient === client.id ? "action.selected" : "transparent" }}>
             {client.name}
           </ListItem>
         ))}
