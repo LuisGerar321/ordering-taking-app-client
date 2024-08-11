@@ -1,12 +1,22 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { StepperContext } from "../contexts/Stepper";
-import { clients } from "../api";
 import { Box, Grid, IconButton, InputBase, List, ListItem, Paper, Typography, Chip } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { EStepperAction } from "../store/Stepper";
+import { getClients } from "../api";
+import { IResponse } from "../interfaces";
 
 export const ClientList = () => {
+  const [clients, setClients] = useState<any[]>([]);
+  useEffect(() => {
+    getClients()
+      .then((data: IResponse) => {
+        setClients(data.data.items);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const context = useContext(StepperContext);
 
   if (!context) {

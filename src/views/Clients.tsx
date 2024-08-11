@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Client } from "../components/Client";
-import { clients } from "../api";
 import { Box, Grid } from "@mui/material";
 import { Content } from "../components/layout/Content";
+import { getClients } from "../api/index";
+import { IResponse } from "../interfaces";
 
 export const Clients = () => {
+  const [clients, setClients] = useState<any[]>([]);
+  useEffect(() => {
+    getClients()
+      .then((data: IResponse) => {
+        setClients(data.data.items);
+      })
+      .catch((err) => console.log(err));
+  }, []);
   return (
     <Content>
       <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: "70%", height: "70%" }}>

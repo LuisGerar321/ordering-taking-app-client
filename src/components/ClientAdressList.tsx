@@ -1,10 +1,20 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { StepperContext } from "../contexts/Stepper";
-import { shippingAddresses } from "../api";
+import { getClients, getShippingAddresses } from "../api";
 import { Box, Grid, IconButton, List, ListItem, Paper, Typography, Chip } from "@mui/material";
 import { EStepperAction } from "../store/Stepper";
+import { IResponse } from "../interfaces";
 
 export const ClientAdressList = () => {
+  const [shippingAddresses, setShippingAddresses] = useState<any[]>([]);
+  useEffect(() => {
+    getShippingAddresses()
+      .then((data: IResponse) => {
+        setShippingAddresses(data.data.items);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const context = useContext(StepperContext);
 
   if (!context) throw new Error("StepperContext needs a StepperProvider");

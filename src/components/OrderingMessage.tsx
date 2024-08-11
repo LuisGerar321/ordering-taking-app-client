@@ -17,7 +17,7 @@ export const OrderingMessage = () => {
   }
 
   const { state } = context;
-  const message = messages[state.activeStep] || "Ordering Captured Sucessfully.";
+  const message = messages[state.activeStep] || "Order ready to submit!";
 
   return (
     <Typography sx={{ position: "absolute", top: { md: 30, xs: 40 }, fontSize: { xs: 40 } }} variant="h2">

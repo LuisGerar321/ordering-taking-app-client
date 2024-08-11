@@ -1,32 +1,42 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Box, Grid, Chip, IconButton, ListItem, Typography } from "@mui/material";
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { Product } from "./Product";
-import { products } from "../api";
 import { StepperContext } from "../contexts/Stepper";
 import { EStepperAction } from "../store/Stepper";
-
-const getRandomColor = () => {
-  const letters = "0123456789ABCDEF";
-  let color = "#";
-  for (let i = 0; i < 6; i++) {
-    color += letters[Math.floor(Math.random() * 16)];
-  }
-  return color;
-};
-
-interface ColorMap {
-  [key: string]: string;
-}
-
-const colorMap: ColorMap = products.reduce((map, product) => {
-  if (!map.hasOwnProperty(product.sku)) {
-    map[product.sku] = getRandomColor();
-  }
-  return map;
-}, {} as ColorMap);
+import { getProducts } from "../api";
+import { IResponse } from "../interfaces";
 
 export const ProductList = () => {
+  const [products, setProducts] = useState<any[]>([]);
+  useEffect(() => {
+    getProducts()
+      .then((data: IResponse) => {
+        setProducts(data.data.items);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
+  const getRandomColor = () => {
+    const letters = "0123456789ABCDEF";
+    let color = "#";
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  };
+
+  interface ColorMap {
+    [key: string]: string;
+  }
+
+  const colorMap: ColorMap = products.reduce((map, product) => {
+    if (!map.hasOwnProperty(product.sku)) {
+      map[product.sku] = getRandomColor();
+    }
+    return map;
+  }, {} as ColorMap);
+
   const context = useContext(StepperContext);
   if (!context) throw new Error("ProductList needs a StepperProvider");
 

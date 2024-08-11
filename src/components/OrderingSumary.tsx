@@ -1,9 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Box, Typography, Divider } from "@mui/material";
 import { StepperContext } from "../contexts/Stepper";
-import { products } from "../api";
+import { getProducts } from "../api";
+import { IResponse } from "../interfaces";
 
 export const OrderingSummary: React.FC = () => {
+  const [products, setProducts] = useState<any[]>([]);
+  useEffect(() => {
+    getProducts()
+      .then((data: IResponse) => {
+        setProducts(data.data.items);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const context = useContext(StepperContext);
   if (!context) throw new Error("OrderingSummary needs a StepperProvider");
 

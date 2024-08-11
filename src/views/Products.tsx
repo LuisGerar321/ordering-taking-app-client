@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Content } from "../components/layout/Content";
 import { Box, Grid } from "@mui/material";
-import { products } from "../api";
 import { Product } from "../components/Product";
+import { getProducts } from "../api/";
+import { IResponse } from "../interfaces";
 
 export const Products = () => {
+  const [products, setProducts] = useState<any[]>([]);
+  useEffect(() => {
+    getProducts()
+      .then((data: IResponse) => {
+        setProducts(data.data.items);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
     <Content>
       <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", width: "70%", height: "70%" }}>
