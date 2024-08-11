@@ -1,4 +1,3 @@
-// components/OrderingMessage.tsx
 import { Typography } from "@mui/material";
 import React, { useContext } from "react";
 import { StepperContext } from "../contexts/Stepper";

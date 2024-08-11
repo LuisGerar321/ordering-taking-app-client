@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import apiClient from "./gateway";
-import { IAddOrder, IResponse } from "../interfaces";
+import { IAddOrder, IResponse, IResponseCreate } from "../interfaces";
 
 export const getClients = async (page = 1, pagesize = 3): Promise<IResponse> => {
   try {
@@ -64,8 +64,8 @@ export const getShippingAddresses = async (page = 1, pagesize = 3): Promise<IRes
 
 export const addOrder = async (newOrder: IAddOrder) => {
   try {
-    const res: AxiosResponse<IResponse> = await apiClient.post("orders", newOrder);
-    const dataResponse: IResponse = res.data;
+    const res: AxiosResponse<IResponseCreate> = await apiClient.post("orders", newOrder);
+    const dataResponse: IResponseCreate = res.data;
     return dataResponse;
   } catch (error) {
     if (axios.isAxiosError(error)) {

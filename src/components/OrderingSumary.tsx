@@ -42,18 +42,18 @@ export const OrderingSummary: React.FC = () => {
       <Divider />
       <Box mt={2} mb={2}>
         <Typography variant="subtitle1" gutterBottom>
-          Cliente:
+          Client:
         </Typography>
         <Typography variant="body1">{clientObj}</Typography>
         <Typography variant="subtitle1" gutterBottom mt={2}>
-          Dirección de Envío:
+          Shipping Address:
         </Typography>
         <Typography variant="body1">{clientAddressObj}</Typography>
       </Box>
       <Divider />
       <Box mt={2}>
         <Typography variant="subtitle1" gutterBottom>
-          Productos Seleccionados:
+          Products selected:
         </Typography>
         <Box display="flex" flexWrap="wrap" gap={2} justifyContent="space-between">
           {selectedProducts.map((product) => (

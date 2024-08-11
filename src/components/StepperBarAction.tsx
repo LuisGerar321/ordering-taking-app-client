@@ -1,17 +1,21 @@
-import { Button, Grid, Box, IconButton, Typography } from "@mui/material";
 import React, { useContext, useState } from "react";
+import { Button, Box, Typography } from "@mui/material";
 import { StepperContext } from "../contexts/Stepper";
 import { EStepperAction } from "../store/Stepper";
 import { addOrder } from "../api";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import Code from "@mui/icons-material/Code";
+import DownloadXmlButton from "./DownloadXmlButton"; // Asegúrate de ajustar la ruta de importación
+import { DownloadXmlButtonProps } from "../interfaces";
 
-export const StepperBarAction = () => {
+export const StepperBarAction: React.FC = () => {
   const context = useContext(StepperContext);
   if (context === undefined) {
     throw new Error("StepperBarAction must be used within a StepperProvider");
   }
 
   const [isSubmited, setIsSubmited] = useState(false);
+  const [dataRespose, setDataResponse] = useState<DownloadXmlButtonProps>();
 
   const { state, dispatch } = context;
 
@@ -19,7 +23,7 @@ export const StepperBarAction = () => {
     try {
       const { client, clientAddress, productIds } = state;
 
-      if (!client || !clientAddress || !productIds || productIds.length === 0) {
+      if (!client || !clientAddress || !productIds || Object.keys(productIds).length === 0) {
         throw new Error("All fields must be filled out");
       }
 
@@ -32,12 +36,14 @@ export const StepperBarAction = () => {
         })),
       });
       alert("Created");
+      setDataResponse(res.data);
       setIsSubmited(true);
       console.log("Order created:", res);
     } catch (error) {
       console.error("Error creating order:", error);
     }
   };
+
   return (
     <Box
       sx={{
@@ -51,16 +57,28 @@ export const StepperBarAction = () => {
         !isSubmited ? (
           <Button onClick={handleCreateOrder}>Submit Order</Button>
         ) : (
-          <Button variant="contained">
-            <Typography>Download PDF</Typography>
-            <PictureAsPdfIcon></PictureAsPdfIcon>
-          </Button>
+          <Box
+            m={2}
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              width: "100%",
+              height: "100%",
+            }}
+          >
+            <Button sx={{ m: "10px" }} variant="contained">
+              <Typography>Download PDF</Typography>
+              <PictureAsPdfIcon />
+            </Button>
+            <DownloadXmlButton data={dataRespose as DownloadXmlButtonProps} />
+          </Box>
         )
       ) : (
         <React.Fragment>
           <Button
             variant="outlined"
-            disabled={state.activeStep === 0 ? true : false}
+            disabled={state.activeStep === 0}
             onClick={() => {
               dispatch({ type: EStepperAction.BACK });
             }}
