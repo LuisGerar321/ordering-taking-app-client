@@ -56,7 +56,7 @@ export const ClientList = () => {
     <Box m={10}>
       {/* Muestra el cliente seleccionado usando Chip */}
       <Box mb={2}>
-        {selectedClient !== null ? <Chip label={clients.find((client) => client.id === selectedClient)?.name} color="primary" /> : <Typography variant="h6">Ningún cliente seleccionado</Typography>}
+        {selectedClient !== null ? <Chip label={clients.find((client) => client.id === selectedClient)?.name} color="primary" /> : <Typography variant="h6">No client selected</Typography>}
       </Box>
 
       {/* Barra de búsqueda */}

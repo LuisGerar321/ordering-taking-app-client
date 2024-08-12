@@ -36,7 +36,7 @@ export const ClientAdressList = () => {
         {selectedAddress !== null ? (
           <Chip label={shippingAddresses.find((address) => address.id === selectedAddress)?.address} color="primary" />
         ) : (
-          <Typography variant="h6">Ninguna dirección seleccionada</Typography>
+          <Typography variant="h6">No address selected</Typography>
         )}
       </Box>
 
