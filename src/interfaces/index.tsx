@@ -7,7 +7,7 @@ export interface IResponse {
 export interface IResponseCreate {
   status: number;
   message: string;
-  data: DownloadXmlButtonProps;
+  data: IOrder;
 }
 
 export interface IPaginationResponse {
@@ -32,7 +32,7 @@ export interface IAddOrder {
   products: IProduct[];
 }
 
-export interface DownloadXmlButtonProps {
+export interface IOrder {
   id: number;
   createdAt: string;
   updatedAt: string;

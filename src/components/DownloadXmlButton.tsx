@@ -1,10 +1,10 @@
 import React from "react";
 import { Button } from "@mui/material";
 import { create } from "xmlbuilder2";
-import { DownloadXmlButtonProps } from "../interfaces";
+import { IOrder } from "../interfaces";
 
 interface Props {
-  data: DownloadXmlButtonProps;
+  data: IOrder;
 }
 
 const DownloadXmlButton: React.FC<Props> = ({ data }) => {
@@ -65,7 +65,7 @@ const DownloadXmlButton: React.FC<Props> = ({ data }) => {
   };
 
   return (
-    <Button variant="contained" onClick={generateXml}>
+    <Button sx={{ m: "5px" }} variant="contained" onClick={generateXml}>
       Download XML
     </Button>
   );

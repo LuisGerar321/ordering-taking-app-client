@@ -6,7 +6,8 @@ import { addOrder } from "../api";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 import Code from "@mui/icons-material/Code";
 import DownloadXmlButton from "./DownloadXmlButton"; // Asegúrate de ajustar la ruta de importación
-import { DownloadXmlButtonProps } from "../interfaces";
+import { IOrder } from "../interfaces";
+import DownloadPdfButton from "./DownloadPdfButton";
 
 export const StepperBarAction: React.FC = () => {
   const context = useContext(StepperContext);
@@ -15,7 +16,7 @@ export const StepperBarAction: React.FC = () => {
   }
 
   const [isSubmited, setIsSubmited] = useState(false);
-  const [dataRespose, setDataResponse] = useState<DownloadXmlButtonProps>();
+  const [dataRespose, setDataResponse] = useState<IOrder>();
 
   const { state, dispatch } = context;
 
@@ -67,11 +68,8 @@ export const StepperBarAction: React.FC = () => {
               height: "100%",
             }}
           >
-            <Button sx={{ m: "10px" }} variant="contained">
-              <Typography>Download PDF</Typography>
-              <PictureAsPdfIcon />
-            </Button>
-            <DownloadXmlButton data={dataRespose as DownloadXmlButtonProps} />
+            <DownloadPdfButton data={dataRespose as IOrder} />
+            <DownloadXmlButton data={dataRespose as IOrder} />
           </Box>
         )
       ) : (
